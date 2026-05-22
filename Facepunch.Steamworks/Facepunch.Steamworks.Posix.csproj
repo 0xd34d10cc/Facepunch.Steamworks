@@ -5,11 +5,18 @@
 		<DefineConstants>$(DefineConstants);PLATFORM_POSIX</DefineConstants>
 		<TargetFrameworks>netstandard2.1;net6.0;net46</TargetFrameworks>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<LangVersion>10</LangVersion>	
+		<LangVersion>10</LangVersion>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<RootNamespace>Steamworks</RootNamespace>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\UnityPlugin\redistributable_bin\linux64\libsteam_api.so" Condition="$([MSBuild]::IsOSPlatform('Linux'))">
+			<Link>libsteam_api.so</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 	<Import Project="Facepunch.Steamworks.targets" />
 
