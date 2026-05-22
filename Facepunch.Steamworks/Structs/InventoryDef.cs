@@ -48,7 +48,7 @@ namespace Steamworks
 		public string Type => GetProperty( "type" );
 
 		/// <summary>
-		/// Returns true if this is an item that generates an item, rather 
+		/// Returns true if this is an item that generates an item, rather
 		/// than something that is actual an item
 		/// </summary>
 		public bool IsGenerator => Type == "generator";
@@ -98,14 +98,14 @@ namespace Steamworks
 			if ( _properties!= null && _properties.TryGetValue( name, out string val ) )
 				return val;
 
-			uint _ = (uint)Helpers.MemoryBufferSize;
+			// uint _ = (uint)Helpers.MemoryBufferSize;
 
 			if ( !SteamInventory.Internal.GetItemDefinitionProperty( Id, name, out var vl ) )
 				return null;
-				
+
 			if (name == null) //return keys string
 				return vl;
-				
+
 			if ( _properties == null )
 				_properties = new Dictionary<string, string>();
 
@@ -214,7 +214,7 @@ namespace Steamworks
 
 			var allRec = SteamInventory.Definitions
 							.Select( x => x.GetRecipes() )
-							.Where( x => x != null ) 
+							.Where( x => x != null )
 							.SelectMany( x => x );
 
 			_recContaining = allRec.Where( x => x.ContainsIngredient( this ) ).ToArray();
