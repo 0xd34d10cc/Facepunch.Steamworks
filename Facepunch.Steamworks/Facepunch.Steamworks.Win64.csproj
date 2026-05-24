@@ -37,7 +37,7 @@
 		<None Include="steam_api64.dll">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 			<Pack>true</Pack>
-			<PackagePath>content</PackagePath>
+			<PackagePath>runtimes/win-x64/native</PackagePath>
 		</None>
 	</ItemGroup>
 
