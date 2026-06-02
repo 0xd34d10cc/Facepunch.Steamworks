@@ -8,7 +8,7 @@ namespace Steamworks
 	/// <summary>
 	/// Used as a base to create your networking server. This creates a socket
 	/// and listens/communicates with multiple queries.
-	/// 
+	///
 	/// You can override all the virtual functions to turn it into what you
 	/// want it to do.
 	/// </summary>
@@ -95,7 +95,7 @@ namespace Steamworks
 			else
 			{
 				connection.Accept();
-			}			
+			}
 		}
 
 		/// <summary>
@@ -141,7 +141,7 @@ namespace Steamworks
 			{
 				Marshal.FreeHGlobal( messageBuffer );
 			}
-			
+
 
 			//
 			// Overwhelmed our buffer, keep going
@@ -157,7 +157,7 @@ namespace Steamworks
 			var msg = Marshal.PtrToStructure<NetMsg>( msgPtr );
 			try
 			{
-				OnMessage( msg.Connection, msg.Identity, msg.DataPtr, msg.DataSize, msg.RecvTime, msg.MessageNumber, msg.Channel );
+				OnMessage( msg.Connection, msg.Identity, msg.DataPtr, msg.DataSize, msg.MessageNumber, msg.RecvTime, msg.Channel, msg.IdxLane );
 			}
 			finally
 			{
@@ -168,9 +168,9 @@ namespace Steamworks
 			}
 		}
 
-		public virtual void OnMessage( Connection connection, NetIdentity identity, IntPtr data, int size, long messageNum, long recvTime, int channel )
+		public virtual void OnMessage( Connection connection, NetIdentity identity, IntPtr data, int size, long messageNum, long recvTime, int channel, int laneIndex)
 		{
-			Interface?.OnMessage( connection, identity, data, size, messageNum, recvTime, channel );
+			Interface?.OnMessage( connection, identity, data, size, messageNum, recvTime, channel, laneIndex );
 		}
 	}
 }

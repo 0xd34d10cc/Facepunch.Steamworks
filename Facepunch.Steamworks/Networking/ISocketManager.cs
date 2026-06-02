@@ -13,8 +13,8 @@ namespace Steamworks
 		/// <summary>
 		/// Called when the connection is fully connected and can start being communicated with
 		/// </summary>
-		void OnConnected( Connection connection, ConnectionInfo info );			
-			
+		void OnConnected( Connection connection, ConnectionInfo info );
+
 		/// <summary>
 		/// Called when the connection leaves. Must call Close on the connection
 		/// </summary>
@@ -23,6 +23,6 @@ namespace Steamworks
 		/// <summary>
 		/// Received a message from a connection
 		/// </summary>
-		void OnMessage( Connection connection, NetIdentity identity, IntPtr data, int size, long messageNum, long recvTime, int channel );
+		void OnMessage( Connection connection, NetIdentity identity, IntPtr data, int size, long messageNum, long recvTime, int channel, int laneIndex);
 	}
 }

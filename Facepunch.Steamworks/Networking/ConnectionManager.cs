@@ -29,7 +29,7 @@ namespace Steamworks
 			set => Connection.ConnectionName = value;
 		}
 
-		public long UserData 
+		public long UserData
 		{
 			get => Connection.UserData;
 			set => Connection.UserData = value;
@@ -114,7 +114,7 @@ namespace Steamworks
 
 			int totalProcessed = 0;
 			NetMsg** messageBuffer = stackalloc NetMsg*[bufferSize];
-			
+
 			while ( true )
 			{
 				int processed = SteamNetworkingSockets.Internal.ReceiveMessagesOnConnection( Connection, new IntPtr( &messageBuffer[0] ), bufferSize );
@@ -139,7 +139,7 @@ namespace Steamworks
 
 					throw;
 				}
-				
+
 
 				//
 				// Keep going if receiveToEnd and we filled the buffer
@@ -217,7 +217,7 @@ namespace Steamworks
 		}
 
 		/// <summary>
-		/// Ideally should be using an IntPtr version unless you're being really careful with the byte[] array and 
+		/// Ideally should be using an IntPtr version unless you're being really careful with the byte[] array and
 		/// you're not creating a new one every frame (like using .ToArray())
 		/// </summary>
 		public unsafe void SendMessages( Connection[] connections, int connectionCount, byte[] data, SendType sendType = SendType.Reliable, Result[] results = null )
@@ -229,7 +229,7 @@ namespace Steamworks
 		}
 
 		/// <summary>
-		/// Ideally should be using an IntPtr version unless you're being really careful with the byte[] array and 
+		/// Ideally should be using an IntPtr version unless you're being really careful with the byte[] array and
 		/// you're not creating a new one every frame (like using .ToArray())
 		/// </summary>
 		public unsafe void SendMessages( Connection[] connections, int connectionCount, byte[] data, int offset, int length, SendType sendType = SendType.Reliable, Result[] results = null )
@@ -253,7 +253,7 @@ namespace Steamworks
 		{
 			try
 			{
-				OnMessage( msg->DataPtr, msg->DataSize, msg->RecvTime, msg->MessageNumber, msg->Channel );
+				OnMessage( msg->DataPtr, msg->DataSize, msg->MessageNumber, msg->RecvTime, msg->Channel, msg->IdxLane );
 			}
 			finally
 			{
@@ -265,9 +265,9 @@ namespace Steamworks
 			}
 		}
 
-		public virtual void OnMessage( IntPtr data, int size, long messageNum, long recvTime, int channel )
+		public virtual void OnMessage( IntPtr data, int size, long messageNum, long recvTime, int channel, int laneIndex )
 		{
-			Interface?.OnMessage( data, size, messageNum, recvTime, channel );
+			Interface?.OnMessage( data, size, messageNum, recvTime, channel, laneIndex );
 		}
 	}
 }
